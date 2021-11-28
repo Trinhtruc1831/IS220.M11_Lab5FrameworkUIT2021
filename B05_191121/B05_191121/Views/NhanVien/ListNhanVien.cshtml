@@ -1,0 +1,12 @@
+﻿@model List<B05_191121.Models.NhanVienModel>
+
+<form action="/NhanVien/LietKeTB" method ="POST">
+    <select name="MaNhanVien" id="MaNhanVien">
+        @foreach (var item in Model)
+        {
+            <option value="@item.MaNhanVien">@item.TenNhanVien </option>
+
+        }
+     </select><br>
+     <input type="submit" value="Liệt Kê" name="submit" id="Liet ke" />
+</form>

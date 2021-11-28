@@ -1,0 +1,52 @@
+﻿@model List<B05_191121.Models.NVTBModel>
+@{
+    ViewData["Title"] = "Liệt thiết bị được sửa theo nhân viên";
+}
+<div style="border-style: solid">
+    <p>Danh sách thiết bị của nhân viên được chọn sửa</p>
+    <table border="1">
+        <tr>
+            <th>Mã thiết bị</th>
+            <th>Mã căn hộ</th>
+            <th>Lần Thứ</th>
+            <th>Ngày bảo trì</th>
+            <th>Chức năng</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.GetType().GetProperty("MaThietBi").GetValue(item, null)
+                </td>
+                <td>
+                    @item.GetType().GetProperty("MaCanHo").GetValue(item, null)
+                </td>
+                <td>
+                    @item.GetType().GetProperty("LanThu").GetValue(item, null)
+                </td>
+                <td>
+                    @item.GetType().GetProperty("NgayBaoTri").GetValue(item, null)
+                </td>
+                <td>
+                    <form action="/NhanVien/Delete" method="POST">
+                        <input type="hidden"  name="manv" value= @item.GetType().GetProperty("MaNhanVien").GetValue(item, null)>
+                        <input type="hidden"  name="matb" value=@item.GetType().GetProperty("MaThietBi").GetValue(item, null)>
+                        <input type="hidden"  name="mach" value=@item.GetType().GetProperty("MaCanHo").GetValue(item, null)>
+                        <input type="hidden"  name="lt" value=@item.GetType().GetProperty("LanThu").GetValue(item, null)>
+                        <input type="submit" value="Delete" name="submit" id="Liet ke" />
+                    </form>
+                    <form action="/NhanVien/View" method="POST">
+                        <input type="hidden" name="manv" value=@item.GetType().GetProperty("MaNhanVien").GetValue(item, null)>
+                        <input type="hidden" name="matb" value=@item.GetType().GetProperty("MaThietBi").GetValue(item, null)>
+                        <input type="hidden" name="mach" value=@item.GetType().GetProperty("MaCanHo").GetValue(item, null)>
+                        <input type="hidden" name="lt" value=@item.GetType().GetProperty("LanThu").GetValue(item, null)>
+                        <input type="hidden" name="nbt" value=@item.GetType().GetProperty("NgayBaoTri").GetValue(item, null)>
+                        <input type="submit" value="View" name="submit" id="Liet ke" />
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
